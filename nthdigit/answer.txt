@@ -1,0 +1,77 @@
+※これは解答用テキストファイルです。
+
+■解答を記入してください。
+9
+8
+9
+1
+3
+9
+8
+2
+
+
+
+
+
+
+■使用言語・動作環境について
+(1)言語の種類を記入してください。未記入の場合、減点となります。
+Perl
+
+
+(2)コンパイラ／インタプリタの名称・バージョン情報を記入してください。未記入の場合、減点となります。
+perl 5, version 14, subversion 2 (v5.14.2) built for i686-linux-gnu-thread-multi-64int
+
+
+■プログラムの特長・工夫した点等、アピールポイントについて。
+あなたが書いたコードの内容や工夫した点をわかりやすく説明してください。未記入の場合、減点となります。
+言われたことにどこまでも忠実にかかる時間を度外視して取り組みました。
+
+
+■もし企業からのスカウトメールがきたらどのくらい積極的にアクションすると思いますか？任意でお答えください。
+「積極的に会ってみたいと思う」「社名や条件次第では会ってみたいと思う」「よほどのことがない限り返信しない」、他ありましたら記入してください。
+特になし。
+
+
+■あなたが書いたコードを貼り付けてください。未記入の場合は評価の対象外となります。
+#!/usr/bin/perl
+use strict;
+use Data::Dumper;
+
+my $data_dir="./nthdigit/";
+my $answer_f="answer.txt";
+my $samplein_f="sample.in.txt";
+my $sampleout_f="sample.out.txt";
+my $testdata_f="testdata.in.txt";
+
+my %q_num=&q_num();
+#print Dumper(%q_num);
+#exit;
+my $n=1;
+for(my $i=1;$i>=1;$i++) {
+#for(my $i=1;$i<=999999999999999;$i++) {
+#for(my $i=0;$i<=3333333333;$i++) {
+    for(my $j=0;$j<length($i);$j++) {
+        my $k=substr($i,$j,1);
+        if(defined($q_num{$n})) {
+            print $n."\t".$k."\t".time."\n";
+            # last.
+            exit if($n==3333333333);
+        }
+        $n++;
+    }
+#    print "\n";
+#    print $i."\n";
+}
+sub q_num {
+    my %q_nums;
+    if(open(Q,"$data_dir$testdata_f")) {
+        map{chomp;$q_nums{$_}++} <Q>;
+        close(Q);
+    }
+    return %q_nums;
+}
+
+
+
